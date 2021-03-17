@@ -27,11 +27,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        imageView = findViewById(R.id.image_view);
-        textView = findViewById(R.id.text_view);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.fragment_container_view, FirstFragment.class, null)
+                    .commit();
+        }
 
-        textView.setText("Mobile Computing");
 
+        /*
         Picasso.get().load("https://square.github.io/picasso/static/sample.png").into(imageView);
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -57,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.e("", t.getLocalizedMessage());
             }
-        });
+        });*/
         /*
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
@@ -94,4 +98,9 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
      */
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }
